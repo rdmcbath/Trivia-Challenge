@@ -1,0 +1,91 @@
+[
+{
+"id": 0,
+"category": "General Knowledge",
+"difficulty": "hard",
+"question": "This is the correct spelling of &quot;Supercalifragilisticexpialidocious&quot;.",
+"correct_answer": "True",
+"incorrect_answer": "False"
+},
+
+{
+"id": 1,
+"category": "Science: Mathematics",
+"difficulty": "hard",
+"question": "The binary number &quot;101001101&quot; is equivalent to the Decimal number &quot;334&quot;",
+"correct_answer": "False",
+"incorrect_answer": "True"
+},
+
+{
+"id": 2,
+"category": "Entertainment: Video Games",
+"difficulty": "hard",
+"question": "In &quot;Portal 2&quot;, Cave Johnson started out Aperture Science as a shower curtain company.",
+"correct_answer": "True",
+"incorrect_answer": "False"
+},
+
+{
+"id": 3,
+"category": "Science: Computers",
+"difficulty": "hard",
+"question": "DHCP stands for Dynamic Host Configuration Port.",
+"correct_answer": "False",
+"incorrect_answer": "True"
+},
+
+{
+"id": 4,
+"category": "Science: Computers",
+"difficulty": "hard",
+"question": "The IBM PC used an Intel 8008 microprocessor clocked at 4.77 MHz and 8 kilobytes of memory.",
+"correct_answer": "False",
+"incorrect_answer": "True"
+},
+
+{
+"id": 5,
+"category": "History",
+"difficulty": "hard",
+"question": "The Battle of Trafalgar took place on October 23rd, 1805",
+"correct_answer": "False",
+"incorrect_answer": "True"
+},
+
+{
+"id": 6,
+"category": "Geography",
+"difficulty": "hard",
+"question": "Switzerland has four national languages, English being one of them.",
+"correct_answer": "False",
+"incorrect_answer": "True"
+},
+
+{
+"id": 7,
+"category": "Entertainment: Japanese Anime & Manga",
+"difficulty": "hard",
+"question": "Druid is a mage class in &quot;Log Horizon&quot;.",
+"correct_answer": "False",
+"incorrect_answer": "True"
+},
+
+{
+"id": 8,
+"category": "Celebrities",
+"difficulty": "hard",
+"question": "Lady Gaga&#039;s real name is Stefani Joanne Angelina Germanotta.",
+"correct_answer": "True",
+"incorrect_answer": "False"
+},
+
+{
+"id": 9,
+"category": "Science: Mathematics",
+"difficulty": "hard",
+"question": "L&#039;H&ocirc;pital was the mathematician who created the homonymous rule that uses derivatives to evaluate limits with indeterminations.",
+"correct_answer": "False",
+"incorrect_answer": "True"
+}
+]

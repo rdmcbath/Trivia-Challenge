@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/frame_layout_quiz_activity"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.rdm.triviachallenge.QuizActivity">
+
+    <ImageView
+        android:id="@+id/background_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha=".9"
+        android:scaleType="centerCrop"
+        android:src="@drawable/main_background_image" />
+
+    <RelativeLayout
+        android:id="@+id/relative_quiz_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/includedLayout"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            layout="@layout/question_item"/>
+
+        <LinearLayout
+            android:id="@+id/buttons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/includedLayout"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="16dp"
+            android:paddingTop="8dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonTrue"
+                android:clickable="true"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@color/colorPrimaryDark"
+                android:text="@string/true_"
+                android:textColor="#ffff" />
+
+            <Button
+                android:id="@+id/buttonFalse"
+                android:clickable="true"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:background="@color/colorPrimaryDark"
+                android:text="@string/false_"
+                android:textColor="#ffff" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/currentQuestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="16dp"
+            android:layout_below="@id/buttons"
+            android:text="@string/current_question"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+    </RelativeLayout>
+</FrameLayout>
