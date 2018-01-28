@@ -16,7 +16,7 @@ public class QuizUtils {
     private static final String CURRENT_SCORE_KEY = "current_score";
     private static final String GAME_FINISHED = "game_finished";
     private static final String HIGH_SCORE_KEY = "high_score";
-    private static final int NUM_ANSWERS = 2;
+    private static final int NUM_ANSWERS = 10;
 
     /**
      * Generates an ArrayList of Integers that contains IDs to NUM_ANSWERS questions. These

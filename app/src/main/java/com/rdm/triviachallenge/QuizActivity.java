@@ -36,6 +36,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     private TextView mCategoryView;
     private TextView mQuestionView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "QUIZACTIVITY: OnCreate Method called");
@@ -97,30 +98,28 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-
         showCorrectAnswer();
 
-        // Get the button that was pressed.
-        Button pressedButton = (Button) v;
-        // Get the index of the pressed button
-        int userAnswerIndex = -1;
-        mButtons = new Button[mButtonIDs.length];
-        for (int i = 0; i < mButtons.length; i++) {
-            if (pressedButton.getId() == mButtonIDs[i]) {
-                userAnswerIndex = i;
-            }
-        }
-        // Get the ID of the sample that the user selected.
-        int userAnswerID = mQuestionIDs.get(userAnswerIndex);
+        if (checkQuestion(mAnswerID)) {
+            Log.i(TAG, "onClick: checkQuestion method called");
+            Button buttonTrue = findViewById(R.id.buttonTrue);
 
-        // If the user is correct, increase the score and update high score.
-        if (QuizUtils.userCorrect(mAnswerID, userAnswerID)) {
+            //user answered incorrectly so let them know
+            Toast.makeText(this, getString(R.string.right),
+                    Toast.LENGTH_SHORT).show();
             mCurrentScore++;
             QuizUtils.setCurrentScore(this, mCurrentScore);
-            if (mCurrentScore > mHighScore) {
-                mHighScore = mCurrentScore;
-                QuizUtils.setHighScore(this, mHighScore);
-            }
+            Log.i(TAG, "onClick: current score is " + QuizUtils.getCurrentScore(this));
+
+        } else {
+            //user answered correctly, so let them know and increase the score by 1
+            Toast.makeText(this, getString(R.string.wrong),
+                    Toast.LENGTH_SHORT).show();
+        }
+
+        if (mCurrentScore > mHighScore) {
+            mHighScore = mCurrentScore;
+            QuizUtils.setHighScore(this, mHighScore);
         }
 
         // Remove the answer from the list of all answers, so it doesn't get asked again.
@@ -140,8 +139,7 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-
-   //Disable the buttons and change the background colors to show the correct answer.
+    //Disable the buttons and change the background colors to show the correct answer.
     private void showCorrectAnswer() {
         Question currentQuestion = Question.getQuestionByID(this, mAnswerID);
         Log.i(TAG, "onClick: Current Answer is " + currentQuestion.getCorrectAnswer());
@@ -152,17 +150,29 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (currentQuestion.getCorrectAnswer()) {
             case "True":
+                //if true button was pressed, user is correct. Set colors and increment score.
+
+
                 buttonTrue.setBackgroundResource(android.R.color.holo_green_light);
+
+                Log.i(TAG, "onClick: current score is " + QuizUtils.getCurrentScore(this));
                 buttonFalse.setBackgroundResource(android.R.color.holo_red_light);
+
                 break;
             case "False":
+
                 buttonFalse.setBackgroundResource(android.R.color.holo_green_light);
                 buttonTrue.setBackgroundResource(android.R.color.holo_red_light);
+
                 break;
             default:
                 throw new RuntimeException("Unknown button ID");
-
         }
+    }
+
+    private boolean checkQuestion (int mAnswerID){
+        String userAnswer = Question.getQuestionByID(this, mAnswerID).getCorrectAnswer();
+        return userAnswer.equals("true");
     }
 }
 

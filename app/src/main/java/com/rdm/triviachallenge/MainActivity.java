@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Get the high and max score.
         int highScore = QuizUtils.getHighScore(this);
-        int maxScore = Question.getAllQuestionIDs(this).size() - 1;
+        int maxScore = Question.getAllQuestionIDs(this).size();
 
         // Set the high score text.
         String highScoreText = getString(R.string.high_score, highScore, maxScore);
@@ -36,14 +36,14 @@ public class MainActivity extends AppCompatActivity {
             Intent resultsIntent = new Intent(MainActivity.this, ResultsActivity.class);
             startActivity(resultsIntent);
 
-//            TextView gameFinishedTextView = findViewById(R.id.gameResult);
-//            TextView yourScoreTextView = findViewById(R.id.resultScore);
-//            int maxScore = Question.getAllQuestionIDs(this).size() - 1;
-//            Integer yourScore = QuizUtils.getCurrentScore(this);
-//            String yourScoreText = getString(R.string.score_result, yourScore, maxScore);
-//            yourScoreTextView.setText(yourScoreText);
-//            gameFinishedTextView.setVisibility(View.VISIBLE);
-//            yourScoreTextView.setVisibility(View.VISIBLE);
+            TextView gameFinishedTextView = findViewById(R.id.gameResult);
+            TextView yourScoreTextView = findViewById(R.id.resultScore);
+            int maxScore = Question.getAllQuestionIDs(this).size();
+            Integer yourScore = QuizUtils.getCurrentScore(this);
+            String yourScoreText = getString(R.string.score_result, yourScore, maxScore);
+            yourScoreTextView.setText(yourScoreText);
+            gameFinishedTextView.setVisibility(View.VISIBLE);
+            yourScoreTextView.setVisibility(View.VISIBLE);
         }
         return intent;
     }

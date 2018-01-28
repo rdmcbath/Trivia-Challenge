@@ -38,6 +38,7 @@
             <Button
                 android:id="@+id/buttonTrue"
                 android:clickable="true"
+                android:elevation="10dp"
                 android:layout_width="150dp"
                 android:layout_height="200dp"
                 android:layout_marginEnd="8dp"
@@ -49,6 +50,7 @@
             <Button
                 android:id="@+id/buttonFalse"
                 android:clickable="true"
+                android:elevation="10dp"
                 android:layout_width="150dp"
                 android:layout_height="200dp"
                 android:background="@color/colorPrimaryDark"

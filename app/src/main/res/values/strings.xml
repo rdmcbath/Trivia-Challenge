@@ -5,6 +5,8 @@
     <string name="instruction2">Can you score 100%?</string>
 
     <string name="new_game">Begin</string>
+    <string name="right">Right answer!</string>
+    <string name="wrong">Wrong answer!</string>
     <string name="high_score">High Score: %1$d / %2$d</string>
     <string name="preference_file_key">Score Preferences</string>
     <string name="game_finished">Game Finished!</string>
