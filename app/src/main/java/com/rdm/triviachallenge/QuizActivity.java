@@ -26,10 +26,10 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     private static final String TAG = QuizActivity.class.getSimpleName();
     private static final int CORRECT_ANSWER_DELAY_MILLIS = 1000;
     private static final String REMAINING_QUESTIONS_KEY = "remaining_questions";
-    private int[] mButtonIDs = {R.id.buttonTrue, R.id.buttonFalse};
     private int mCurrentScore;
     private int mHighScore;
     private Button[] mButtons;
+    private int[] mButtonIDs = {R.id.buttonTrue, R.id.buttonFalse};
     private ArrayList<Integer> mRemainingQuestionIDs = new ArrayList<>();
     private ArrayList<Integer> mQuestionIDs = new ArrayList<>();
     private int mAnswerID;
@@ -44,22 +44,23 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
         boolean isNewGame = !getIntent().hasExtra(REMAINING_QUESTIONS_KEY);
 
-        // Initialize the Category & Question view.
-        View includedLayout = findViewById(R.id.includedLayout ); // rootView id from included layout
-        mCategoryView = includedLayout.findViewById( R.id.categoryView ); //id of view inside included layout
-        mQuestionView = includedLayout.findViewById( R.id.questionView );
+        // Initialize the Category & Question view, from an included layout.
+        View includedLayout = findViewById(R.id.includedLayout);
+        mCategoryView = includedLayout.findViewById(R.id.categoryView);
+        mQuestionView = includedLayout.findViewById(R.id.questionView);
 
         // Initialize the buttons.
-//        Button trueButton = findViewById(R.id.buttonTrue);
-//        Button falseButton = findViewById(R.id.buttonFalse);
-        mButtons = initializeButtons(mQuestionIDs);
+        Button buttonTrue = findViewById(R.id.buttonTrue);
+        buttonTrue.setOnClickListener(this);
+        Button buttonFalse = findViewById(R.id.buttonFalse);
+        buttonFalse.setOnClickListener(this);
 
         // If it's a new game, set the current score to 0 and load all questions.
         if (isNewGame) {
             QuizUtils.setCurrentScore(this, 0);
             mRemainingQuestionIDs = Question.getAllQuestionIDs(this);
 
-            // Otherwise, get the remaining questions from the Intent.
+        // Otherwise, get the remaining questions from the Intent.
         } else {
             mRemainingQuestionIDs = getIntent().getIntegerArrayListExtra(REMAINING_QUESTIONS_KEY);
         }
@@ -72,78 +73,48 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         mQuestionIDs = QuizUtils.generateQuestion(mRemainingQuestionIDs);
         mAnswerID = QuizUtils.getCorrectAnswerID(mQuestionIDs);
 
+        Question currentQuestion = Question.getQuestionByID(this, mAnswerID);
+        Log.i(TAG, "onClick: Current Question is " + currentQuestion.getQuestion());
+        Log.i(TAG, "onClick: Current Answer is " + currentQuestion.getCorrectAnswer());
+
+        if (currentQuestion == null) {
+            Toast.makeText(this, getString(R.string.question_not_found_error),
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
         // If there is only one answer left, end the game.
         if (mQuestionIDs.size() < 2) {
             QuizUtils.endGame(this);
             finish();
         }
 
-        Question answerQuestion = Question.getQuestionByID(this, mAnswerID);
-
-        if (answerQuestion == null) {
-            Toast.makeText(this, getString(R.string.question_not_found_error),
-                    Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        String categoryView = answerQuestion.getCategory();
+        //Display the current question
+        String categoryView = currentQuestion.getCategory();
         mCategoryView.setText(categoryView);
-        String questionView = answerQuestion.getQuestion();
+        String questionView = currentQuestion.getQuestion();
         mQuestionView.setText(questionView);
     }
 
-    /**
-     * Initializes the button to the correct views, and sets the text to the composers names,
-     * and sets the OnClick listener to the buttons.
-     *
-     * @param answerQuestionIDs The IDs of the possible answers to the question.
-     * @return The Array of initialized buttons.
-     */
-    private Button[] initializeButtons(ArrayList<Integer> answerQuestionIDs) {
-        Log.i(TAG, "QUIZACTIVITY: Initialize Buttons Method Called");
-        Button[] buttons = new Button[mButtonIDs.length];
-        for (int i = 0; i < answerQuestionIDs.size(); i++) {
-            Button currentButton = findViewById(mButtonIDs[i]);
-            Question currentQuestion = Question.getQuestionByID(this, answerQuestionIDs.get(i));
-            buttons[i] = currentButton;
-            currentButton.setOnClickListener(this);
-            if (currentQuestion != null) {
-                currentButton.setText(currentQuestion.getCorrectAnswer());
-            }
-        }
-
-        return buttons;
-    }
-
-    /**
-     * The OnClick method for all of the answer buttons. The method uses the index of the button
-     * in button array to to get the ID of the sample from the array of question IDs. It also
-     * toggles the UI to show the correct answer.
-     *
-     * @param v The button that was clicked.
-     */
     @Override
     public void onClick(View v) {
-        Log.i(TAG, "QUIZACTIVITY: ONCLICK method called and button pressed");
 
-        // Show the correct answer.
         showCorrectAnswer();
+
         // Get the button that was pressed.
         Button pressedButton = (Button) v;
-
         // Get the index of the pressed button
         int userAnswerIndex = -1;
+        mButtons = new Button[mButtonIDs.length];
         for (int i = 0; i < mButtons.length; i++) {
             if (pressedButton.getId() == mButtonIDs[i]) {
                 userAnswerIndex = i;
             }
         }
+        // Get the ID of the sample that the user selected.
+        int userAnswerID = mQuestionIDs.get(userAnswerIndex);
 
-        // Get the ID of the answer that the user selected.
-        int userAnswerSampleID = mQuestionIDs.get(userAnswerIndex);
-
-        // If the user is correct, increase their score.
-        if (QuizUtils.userCorrect(mAnswerID, userAnswerSampleID)) {
+        // If the user is correct, increase the score and update high score.
+        if (QuizUtils.userCorrect(mAnswerID, userAnswerID)) {
             mCurrentScore++;
             QuizUtils.setCurrentScore(this, mCurrentScore);
             if (mCurrentScore > mHighScore) {
@@ -166,29 +137,33 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(nextQuestionIntent);
             }
         }, CORRECT_ANSWER_DELAY_MILLIS);
+
     }
 
-    /**
-     * Disables the buttons and changes the background colors and player art to
-     * show the correct answer.
-     */
+
+   //Disable the buttons and change the background colors to show the correct answer.
     private void showCorrectAnswer() {
-        for (int i = 0; i < mQuestionIDs.size(); i++) {
-            int buttonQuestionID = mQuestionIDs.get(i);
+        Question currentQuestion = Question.getQuestionByID(this, mAnswerID);
+        Log.i(TAG, "onClick: Current Answer is " + currentQuestion.getCorrectAnswer());
+        Button buttonTrue = findViewById(R.id.buttonTrue);
+        Button buttonFalse = findViewById(R.id.buttonFalse);
+        buttonFalse.setEnabled(false);
+        buttonTrue.setEnabled(false);
 
-            mButtons[i].setEnabled(false);
+        switch (currentQuestion.getCorrectAnswer()) {
+            case "True":
+                buttonTrue.setBackgroundResource(android.R.color.holo_green_light);
+                buttonFalse.setBackgroundResource(android.R.color.holo_red_light);
+                break;
+            case "False":
+                buttonFalse.setBackgroundResource(android.R.color.holo_green_light);
+                buttonTrue.setBackgroundResource(android.R.color.holo_red_light);
+                break;
+            default:
+                throw new RuntimeException("Unknown button ID");
 
-            if (buttonQuestionID == mAnswerID) {
-                mButtons[i].getBackground().setColorFilter(ContextCompat.getColor
-                                (this, android.R.color.holo_green_light),
-                        PorterDuff.Mode.MULTIPLY);
-                mButtons[i].setTextColor(Color.WHITE);
-            } else {
-                mButtons[i].getBackground().setColorFilter(ContextCompat.getColor
-                                (this, android.R.color.holo_red_light),
-                        PorterDuff.Mode.MULTIPLY);
-                mButtons[i].setTextColor(Color.WHITE);
-            }
         }
     }
 }
+
+

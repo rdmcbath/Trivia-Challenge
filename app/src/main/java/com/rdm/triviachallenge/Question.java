@@ -15,12 +15,11 @@ import java.util.ArrayList;
 
 import static java.lang.System.in;
 
-
 /**
  * Java Object representing a single question. Also includes utility methods for obtaining questions
  * from assets.
  */
-class Question implements Parcelable {
+class Question {
 
     private int mQuestionID;
     private String mCategory;
@@ -47,18 +46,6 @@ class Question implements Parcelable {
         mCorrectAnswer = in.readString();
         mIncorrectAnswer = in.readString();
     }
-
-    public static final Creator<Question> CREATOR = new Creator<Question>() {
-        @Override
-        public Question createFromParcel(Parcel in) {
-            return new Question(in);
-        }
-
-        @Override
-        public Question[] newArray(int size) {
-            return new Question[size];
-        }
-    };
 
     /**
      * Gets a single question by its ID.
@@ -215,18 +202,4 @@ class Question implements Parcelable {
         mIncorrectAnswer = incorrect_answer;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(mQuestionID);
-        dest.writeString(mCategory);
-        dest.writeString(mDifficulty);
-        dest.writeString(mQuestion);
-        dest.writeString(mCorrectAnswer);
-        dest.writeString(mIncorrectAnswer);
-    }
 }

@@ -66,6 +66,7 @@
             android:paddingTop="16dp"
             android:layout_below="@id/buttons"
             android:text="@string/current_question"
+            android:visibility="gone"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
     </RelativeLayout>

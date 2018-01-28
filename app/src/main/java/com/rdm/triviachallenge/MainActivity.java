@@ -32,14 +32,18 @@ public class MainActivity extends AppCompatActivity {
     public Intent getIntent() {
         Intent intent = new Intent(super.getIntent());
         if (intent.hasExtra(GAME_FINISHED)) {
-            TextView gameFinishedTextView = findViewById(R.id.gameResult);
-            TextView yourScoreTextView = findViewById(R.id.resultScore);
-            int maxScore = Question.getAllQuestionIDs(this).size() - 1;
-            Integer yourScore = QuizUtils.getCurrentScore(this);
-            String yourScoreText = getString(R.string.score_result, yourScore, maxScore);
-            yourScoreTextView.setText(yourScoreText);
-            gameFinishedTextView.setVisibility(View.VISIBLE);
-            yourScoreTextView.setVisibility(View.VISIBLE);
+
+            Intent resultsIntent = new Intent(MainActivity.this, ResultsActivity.class);
+            startActivity(resultsIntent);
+
+//            TextView gameFinishedTextView = findViewById(R.id.gameResult);
+//            TextView yourScoreTextView = findViewById(R.id.resultScore);
+//            int maxScore = Question.getAllQuestionIDs(this).size() - 1;
+//            Integer yourScore = QuizUtils.getCurrentScore(this);
+//            String yourScoreText = getString(R.string.score_result, yourScore, maxScore);
+//            yourScoreTextView.setText(yourScoreText);
+//            gameFinishedTextView.setVisibility(View.VISIBLE);
+//            yourScoreTextView.setVisibility(View.VISIBLE);
         }
         return intent;
     }

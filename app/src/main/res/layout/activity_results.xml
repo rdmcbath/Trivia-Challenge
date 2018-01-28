@@ -40,9 +40,10 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
-            android:onClick="playAgain"
             android:padding="8dp"
             android:text="@string/play_again"
+            android:onClick="playAgain"
+            android:clickable="true"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:background="@color/colorAccent"/>

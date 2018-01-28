@@ -16,13 +16,13 @@ public class QuizUtils {
     private static final String CURRENT_SCORE_KEY = "current_score";
     private static final String GAME_FINISHED = "game_finished";
     private static final String HIGH_SCORE_KEY = "high_score";
-    private static final int NUM_ANSWERS = 4;
+    private static final int NUM_ANSWERS = 2;
 
     /**
      * Generates an ArrayList of Integers that contains IDs to NUM_ANSWERS questions. These
      * constitute the possible answers to the question.
      * @param remainingQuestionIDs The ArrayList of Integers which contains the IDs of all
-     *                           questionss that haven't been used yet.
+     * questions that haven't been used yet.
      * @return The ArrayList of possible answers.
      */
     static ArrayList<Integer> generateQuestion(ArrayList<Integer> remainingQuestionIDs){
