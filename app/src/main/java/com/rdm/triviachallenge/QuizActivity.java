@@ -18,10 +18,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Objects;
 
-/**
- * Created by Rebecca on 1/24/2018.
- */
-
 public class QuizActivity extends AppCompatActivity {
 
     private static final String TAG = QuizActivity.class.getSimpleName();
@@ -29,8 +25,6 @@ public class QuizActivity extends AppCompatActivity {
     private static final String REMAINING_QUESTIONS_KEY = "remaining_questions";
     private int mCurrentScore;
     private int mHighScore;
-    private Button[] mButtons;
-    private int[] mButtonIDs = {R.id.buttonTrue, R.id.buttonFalse};
     private ArrayList<Integer> mRemainingQuestionIDs = new ArrayList<>();
     private ArrayList<Integer> mQuestionIDs = new ArrayList<>();
     private int mAnswerID;
@@ -39,7 +33,6 @@ public class QuizActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i(TAG, "QUIZACTIVITY: OnCreate Method called");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
@@ -55,7 +48,7 @@ public class QuizActivity extends AppCompatActivity {
             QuizUtils.setCurrentScore(this, 0);
             mRemainingQuestionIDs = Question.getAllQuestionIDs(this);
 
-        // Otherwise, get the remaining questions from the Intent.
+            // Otherwise, get the remaining questions from the Intent.
         } else {
             mRemainingQuestionIDs = getIntent().getIntegerArrayListExtra(REMAINING_QUESTIONS_KEY);
         }
@@ -77,8 +70,9 @@ public class QuizActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
             return;
         }
+
         // If there is only one answer left, end the game.
-        if (mQuestionIDs.size() < 2) {
+        if (mQuestionIDs.size() < 2 ) {
             QuizUtils.endGame(this);
             finish();
         }
@@ -96,15 +90,34 @@ public class QuizActivity extends AppCompatActivity {
         showCorrectAnswer();
 
         if (Objects.equals(Question.getQuestionByID(this, mAnswerID).getCorrectAnswer(), "True")) {
-                    //the the user is correct
-                    mCurrentScore++;
-                    QuizUtils.setCurrentScore(this, mCurrentScore);
-                    Log.i(TAG, "onClick: current score is " + QuizUtils.getCurrentScore(this));
-                } else {
-                    //the user is incorrect
-                    Toast.makeText(this, R.string.wrong, Toast.LENGTH_SHORT).show();
-                    Log.i(TAG, "onClick: current score is " + QuizUtils.getCurrentScore(this));
+            //the the user is correct
+            mCurrentScore++;
+            QuizUtils.setCurrentScore(this, mCurrentScore);
+            final Toast toast = Toast.makeText(getApplicationContext(), R.string.right, Toast.LENGTH_SHORT);
+            toast.show();
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    toast.cancel();
                 }
+            }, 500);
+            Log.i(TAG, "onClick: current score is " + QuizUtils.getCurrentScore(this));
+        } else {
+            //the user is incorrect
+            Toast.makeText(this, R.string.wrong, Toast.LENGTH_SHORT).show();
+            final Toast toast = Toast.makeText(getApplicationContext(), R.string.wrong, Toast.LENGTH_SHORT);
+            toast.show();
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    toast.cancel();
+                }
+            }, 500);
+        }
 
         if (mCurrentScore > mHighScore) {
             mHighScore = mCurrentScore;
@@ -125,9 +138,7 @@ public class QuizActivity extends AppCompatActivity {
                 startActivity(nextQuestionIntent);
             }
         }, CORRECT_ANSWER_DELAY_MILLIS);
-
     }
-
 
     public void falseClick(View v) {
         Log.i(TAG, "trueClick: FALSE Button Clicked");
@@ -135,14 +146,33 @@ public class QuizActivity extends AppCompatActivity {
 
         if (Objects.equals(Question.getQuestionByID(this, mAnswerID).getCorrectAnswer(), "True")) {
             //the user is incorrect
-          Toast.makeText(this, R.string.wrong, Toast.LENGTH_SHORT).show();
+            final Toast toast = Toast.makeText(getApplicationContext(), R.string.wrong, Toast.LENGTH_SHORT);
+            toast.show();
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    toast.cancel();
+                }
+            }, 500);
             QuizUtils.setCurrentScore(this, mCurrentScore);
             Log.i(TAG, "onClick: current score is " + QuizUtils.getCurrentScore(this));
         } else {
-             //the buser is correct
+            //the buser is correct
             mCurrentScore++;
             QuizUtils.setCurrentScore(this, mCurrentScore);
             Log.i(TAG, "onClick: current score is " + QuizUtils.getCurrentScore(this));
+            final Toast toast = Toast.makeText(getApplicationContext(), R.string.right, Toast.LENGTH_SHORT);
+            toast.show();
+
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    toast.cancel();
+                }
+            }, 500);
         }
         if (mCurrentScore > mHighScore) {
             mHighScore = mCurrentScore;
@@ -163,13 +193,11 @@ public class QuizActivity extends AppCompatActivity {
                 startActivity(nextQuestionIntent);
             }
         }, CORRECT_ANSWER_DELAY_MILLIS);
-
     }
 
     //Disable the buttons and change the background colors to show the correct answer.
     private void showCorrectAnswer() {
         Question currentQuestion = Question.getQuestionByID(this, mAnswerID);
-        Log.i(TAG, "onClick: Current Answer is " + currentQuestion.getCorrectAnswer());
         Button buttonTrue = findViewById(R.id.buttonTrue);
         Button buttonFalse = findViewById(R.id.buttonFalse);
         buttonFalse.setEnabled(false);

@@ -7,19 +7,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-/**
- * Created by Rebecca on 1/24/2018.
- */
-
 public class QuizUtils {
 
     private static final String CURRENT_SCORE_KEY = "current_score";
     private static final String GAME_FINISHED = "game_finished";
     private static final String HIGH_SCORE_KEY = "high_score";
-    private static final int NUM_ANSWERS = 10;
+    private static final int NUM_QUESTIONS = 10;
 
     /**
-     * Generates an ArrayList of Integers that contains IDs to NUM_ANSWERS questions. These
+     * Generates an ArrayList of Integers that contains IDs to NUM_QUESTIONS questions. These
      * constitute the possible answers to the question.
      * @param remainingQuestionIDs The ArrayList of Integers which contains the IDs of all
      * questions that haven't been used yet.
@@ -30,15 +26,14 @@ public class QuizUtils {
         // Shuffle the remaining question ID's.
         Collections.shuffle(remainingQuestionIDs);
 
-        ArrayList<Integer> answers = new ArrayList<>();
+        ArrayList<Integer> questions = new ArrayList<>();
 
-        for(int i = 0; i < NUM_ANSWERS; i++){
-            if(i < remainingQuestionIDs.size()) {
-                answers.add(remainingQuestionIDs.get(i));
+        for(int i = 0; i < NUM_QUESTIONS; i++){
+            if(i < remainingQuestionIDs.size() - 1) {
+                questions.add(remainingQuestionIDs.get(i));
             }
         }
-
-        return answers;
+        return questions;
     }
 
     /**
@@ -98,16 +93,6 @@ public class QuizUtils {
         Random r = new Random();
         int answerIndex = r.nextInt(answers.size());
         return answers.get(answerIndex);
-    }
-
-    /**
-     * Checks that the user's selected answer is the correct one.
-     * @param correctAnswer The correct answer.
-     * @param userAnswer The user's answer
-     * @return true if the user is correct, false otherwise.
-     */
-    static boolean userCorrect(int correctAnswer, int userAnswer){
-        return userAnswer == correctAnswer;
     }
 
     /**

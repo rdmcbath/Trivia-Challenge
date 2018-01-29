@@ -1,91 +1,98 @@
 [
-{
-"id": 1,
-"category": "General Knowledge",
-"difficulty": "hard",
-"question": "This is the correct spelling of Supercalifragilisticexpialidocious.",
-"correct_answer": "True",
-"incorrect_answer": "False"
-},
-
-{
-"id": 2,
-"category": "Science: Mathematics",
-"difficulty": "hard",
-"question": "The binary number 101001101 is equivalent to the Decimal number 334",
-"correct_answer": "False",
-"incorrect_answer": "True"
-},
-
-{
-"id": 3,
-"category": "Entertainment: Video Games",
-"difficulty": "hard",
-"question": "In Portal 2, Cave Johnson started out Aperture Science as a shower curtain company.",
-"correct_answer": "True",
-"incorrect_answer": "False"
-},
-
-{
-"id": 4,
-"category": "Science: Computers",
-"difficulty": "hard",
-"question": "DHCP stands for Dynamic Host Configuration Port.",
-"correct_answer": "False",
-"incorrect_answer": "True"
-},
-
-{
-"id": 5,
-"category": "Science: Computers",
-"difficulty": "hard",
-"question": "The IBM PC used an Intel 8008 microprocessor clocked at 4.77 MHz and 8 kilobytes of memory.",
-"correct_answer": "False",
-"incorrect_answer": "True"
-},
-
-{
-"id": 6,
-"category": "History",
-"difficulty": "hard",
-"question": "The Battle of Trafalgar took place on October 23rd, 1805.",
-"correct_answer": "False",
-"incorrect_answer": "True"
-},
-
-{
-"id": 7,
-"category": "Geography",
-"difficulty": "hard",
-"question": "Switzerland has four national languages, English being one of them.",
-"correct_answer": "False",
-"incorrect_answer": "True"
-},
-
-{
-"id": 8,
-"category": "Entertainment: Japanese Anime & Manga",
-"difficulty": "hard",
-"question": "Druid is a mage class in Log Horizon.",
-"correct_answer": "False",
-"incorrect_answer": "True"
-},
-
-{
-"id": 9,
-"category": "Celebrities",
-"difficulty": "hard",
-"question": "Lady Gaga's real name is Stefani Joanne Angelina Germanotta.",
-"correct_answer": "True",
-"incorrect_answer": "False"
-},
-
-{
-"id": 10,
-"category": "Science: Mathematics",
-"difficulty": "hard",
-"question": "L'Hôpital was the mathematician who created the homonymous rule that uses derivatives to evaluate limits with indeterminations.",
-"correct_answer": "False",
-"incorrect_answer": "True"
-}
+  {
+    "id": 1,
+    "category": "General Knowledge",
+    "difficulty": "hard",
+    "question": "This is the correct spelling of Supercalifragilisticexpialidocious.",
+    "correct_answer": "True",
+    "incorrect_answer": "False"
+  },
+  {
+    "id": 2,
+    "category": "Science: Mathematics",
+    "difficulty": "hard",
+    "question": "The binary number 101001101 is equivalent to the Decimal number 334",
+    "correct_answer": "False",
+    "incorrect_answer": "True"
+  },
+  {
+    "id": 3,
+    "category": "Entertainment: Video Games",
+    "difficulty": "hard",
+    "question": "In Portal 2, Cave Johnson started out Aperture Science as a shower curtain company.",
+    "correct_answer": "True",
+    "incorrect_answer": "False"
+  },
+  {
+    "id": 4,
+    "category": "Science: Computers",
+    "difficulty": "hard",
+    "question": "DHCP stands for Dynamic Host Configuration Port.",
+    "correct_answer": "False",
+    "incorrect_answer": "True"
+  },
+  {
+    "id": 5,
+    "category": "Science: Computers",
+    "difficulty": "hard",
+    "question": "The IBM PC used an Intel 8008 microprocessor clocked at 4.77 MHz and 8 kilobytes of memory.",
+    "correct_answer": "False",
+    "incorrect_answer": "True"
+  },
+  {
+    "id": 6,
+    "category": "History",
+    "difficulty": "hard",
+    "question": "The Battle of Trafalgar took place on October 23rd, 1805.",
+    "correct_answer": "False",
+    "incorrect_answer": "True"
+  },
+  {
+    "id": 7,
+    "category": "Geography",
+    "difficulty": "hard",
+    "question": "Switzerland has four national languages, English being one of them.",
+    "correct_answer": "False",
+    "incorrect_answer": "True"
+  },
+  {
+    "id": 8,
+    "category": "Entertainment: Japanese Anime & Manga",
+    "difficulty": "hard",
+    "question": "Druid is a mage class in Log Horizon.",
+    "correct_answer": "False",
+    "incorrect_answer": "True"
+  },
+  {
+    "id": 9,
+    "category": "Celebrities",
+    "difficulty": "hard",
+    "question": "Lady Gaga's real name is Stefani Joanne Angelina Germanotta.",
+    "correct_answer": "True",
+    "incorrect_answer": "False"
+  },
+  {
+    "id": 10,
+    "category": "Science: Mathematics",
+    "difficulty": "hard",
+    "question": "L'Hôpital was the mathematician who created the homonymous rule that uses derivatives to evaluate limits with indeterminations.",
+    "correct_answer": "False",
+    "incorrect_answer": "True"
+  },
+  {
+    "id": 11,
+    "category": "Entertainment: Board Games",
+    "difficulty": "hard",
+    "question": "The board game Go has more possible legal positions than the number of atoms in the visible universe.",
+    "correct_answer": "True",
+    "incorrect_answer": "False"
+  },
+  {
+    "id": 12,
+    "category": "Entertainment: Music",
+    "difficulty": "hard",
+    "question": "The song Mystery Train was released by artist Little Junior's Blue Flames in 1953.",
+    "correct_answer": "True",
+    "incorrect_answer": "False"
+  }
 ]

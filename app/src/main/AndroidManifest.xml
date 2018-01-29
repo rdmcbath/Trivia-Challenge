@@ -15,10 +15,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".QuizActivity"
-            android:launchMode="singleTop"/>
-        <activity android:name=".ResultsActivity"
-            android:launchMode="singleTop"/>
+        <activity android:name=".QuizActivity" />
+        <activity android:name=".ResultsActivity" />
     </application>
 
 </manifest>

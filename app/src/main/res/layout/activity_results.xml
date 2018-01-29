@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,7 +9,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/results_background_image"
+        android:src="@drawable/backgroundimage"
         android:scaleType="centerCrop"
         android:alpha=".9"/>
 
@@ -19,33 +18,70 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/resultScore"
-            android:layout_width="wrap_content"
+            android:id="@+id/congrats"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="4dp"
+            android:gravity="center"
             android:layout_marginBottom="0dp"
             android:layout_marginLeft="0dp"
             android:layout_marginRight="0dp"
-            android:layout_marginTop="4dp"
+
+            android:background="@color/colorAccent"
+            android:text="@string/game_finished"
+            tools:text="Game Finished"
+            android:textSize="52sp"
+            android:textColor="#000"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/resultScore"
+            android:layout_below="@+id/congrats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
             android:background="@color/colorAccent"
             android:text="@string/score_result"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-           android:layout_centerHorizontal="true" />
+            tools:text="Your Score was 9 / 10"
+            android:gravity="center"
+            android:textSize="32sp"
+            android:textColor="#000"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"/>
 
         <Button
             android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="75dp"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
             android:padding="8dp"
+            android:textSize="18dp"
+            android:onClick="playAgain"
             android:text="@string/play_again"
+            android:textColor="#000"
             android:clickable="true"
+            android:layout_centerInParent="true"
+            android:background="@color/colorAccent"/>
+
+        <TextView
+            android:id="@+id/thanks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:background="@color/colorAccent"
+            android:text="@string/thanks"
+            tools:text="Thanks for playing!"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:background="@color/colorAccent"/>
+            android:textColor="#000"
+            android:textSize="24dp"
+            />
+
 
     </RelativeLayout>
 </FrameLayout>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,7 +11,7 @@
         android:layout_height="match_parent"
         android:src="@drawable/main_background_image"
         android:scaleType="centerCrop"
-        android:alpha=".9"/>
+        android:alpha="1.0"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -21,46 +20,43 @@
         <TextView
             android:id="@+id/welcome"
             android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="8dp"
+            android:textSize="48sp"
+            android:padding="8dp"
+
             android:text="@string/welcome"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+            android:gravity="center"
+            android:textColor="#ffff"
+            />
 
         <TextView
-            android:id="@+id/instruction1"
+            android:id="@+id/instruction"
             android:layout_below="@+id/welcome"
             android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="@string/instruction1"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
-
-        <TextView
-            android:id="@+id/instruction2"
-            android:layout_below="@+id/instruction1"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="@string/instruction2"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+            android:background="@color/colorPrimary"
+            android:textSize="24sp"
+            android:text="@string/instruction"
+            android:padding="8dp"
+            android:textColor="#ffff"
+            android:gravity="center"
+            tools:text="You will be presented with 10 true or false questions. Can you score 100%?"/>
 
 
         <Button
         android:id="@+id/button"
+            android:layout_below="@+id/instruction"
         android:layout_width="100dp"
         android:layout_height="75dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:onClick="newGame"
         android:clickable="true"
         android:text="@string/new_game"
-        android:layout_centerInParent="true"
+          android:layout_centerHorizontal="true"
+
         android:background="@color/colorAccent"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
 
@@ -72,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="@string/high_score"
-        tools:text="0 / 10"
+        tools:text="High Score: 5 / 10"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
     <TextView

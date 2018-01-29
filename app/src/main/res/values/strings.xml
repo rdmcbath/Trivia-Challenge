@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Trivia Challenge</string>
     <string name="welcome">Welcome to the Trivia Challenge!</string>
-    <string name="instruction1">You will be presented with 10 true or false questions.</string>
+    <string name="instruction">You will be presented with 10 true or false questions.
+        Can you score 100%?</string>
     <string name="instruction2">Can you score 100%?</string>
 
     <string name="new_game">Begin</string>
@@ -9,8 +10,8 @@
     <string name="wrong">Wrong answer!</string>
     <string name="high_score">High Score: %1$d / %2$d</string>
     <string name="preference_file_key">Score Preferences</string>
-    <string name="game_finished">Game Finished!</string>
-    <string name="score_result">Your Score: %1$d / %2$d</string>
+    <string name="game_finished">Game Finished</string>
+    <string name="score_result">Your Score was %1$d / %2$d</string>
 
     <string name="question_list_load_error">Error loading one or more questions!</string>
     <string name="question_not_found_error">Question not found!</string>
@@ -18,6 +19,7 @@
     <string name="false_">False</string>
     <string name="current_question">%1$d / %2$d</string>
 
-    <string name="play_again">Play Again?</string>
+    <string name="play_again">Try Again?</string>
+    <string name="thanks">Thanks for playing!</string>
 
 </resources>
