@@ -16,12 +16,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Created by Rebecca on 1/24/2018.
  */
 
-public class QuizActivity extends AppCompatActivity implements View.OnClickListener {
+public class QuizActivity extends AppCompatActivity {
 
     private static final String TAG = QuizActivity.class.getSimpleName();
     private static final int CORRECT_ANSWER_DELAY_MILLIS = 1000;
@@ -36,7 +37,6 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     private TextView mCategoryView;
     private TextView mQuestionView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "QUIZACTIVITY: OnCreate Method called");
@@ -49,12 +49,6 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         View includedLayout = findViewById(R.id.includedLayout);
         mCategoryView = includedLayout.findViewById(R.id.categoryView);
         mQuestionView = includedLayout.findViewById(R.id.questionView);
-
-        // Initialize the buttons.
-        Button buttonTrue = findViewById(R.id.buttonTrue);
-        buttonTrue.setOnClickListener(this);
-        Button buttonFalse = findViewById(R.id.buttonFalse);
-        buttonFalse.setOnClickListener(this);
 
         // If it's a new game, set the current score to 0 and load all questions.
         if (isNewGame) {
@@ -96,27 +90,60 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
         mQuestionView.setText(questionView);
     }
 
-    @Override
-    public void onClick(View v) {
+    public void trueClick(View v) {
+        Log.i(TAG, "trueClick: TRUE button clicked");
+
         showCorrectAnswer();
 
-        if (checkQuestion(mAnswerID)) {
-            Log.i(TAG, "onClick: checkQuestion method called");
-            Button buttonTrue = findViewById(R.id.buttonTrue);
+        if (Objects.equals(Question.getQuestionByID(this, mAnswerID).getCorrectAnswer(), "True")) {
+                    //the the user is correct
+                    mCurrentScore++;
+                    QuizUtils.setCurrentScore(this, mCurrentScore);
+                    Log.i(TAG, "onClick: current score is " + QuizUtils.getCurrentScore(this));
+                } else {
+                    //the user is incorrect
+                    Toast.makeText(this, R.string.wrong, Toast.LENGTH_SHORT).show();
+                    Log.i(TAG, "onClick: current score is " + QuizUtils.getCurrentScore(this));
+                }
 
-            //user answered incorrectly so let them know
-            Toast.makeText(this, getString(R.string.right),
-                    Toast.LENGTH_SHORT).show();
+        if (mCurrentScore > mHighScore) {
+            mHighScore = mCurrentScore;
+            QuizUtils.setHighScore(this, mHighScore);
+        }
+
+        // Remove the answer from the list of all answers, so it doesn't get asked again.
+        mRemainingQuestionIDs.remove(Integer.valueOf(mAnswerID));
+
+        // Wait some time in order for user to see correct answer, then go to the next question.
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent nextQuestionIntent = new Intent(QuizActivity.this, QuizActivity.class);
+                nextQuestionIntent.putExtra(REMAINING_QUESTIONS_KEY, mRemainingQuestionIDs);
+                finish();
+                startActivity(nextQuestionIntent);
+            }
+        }, CORRECT_ANSWER_DELAY_MILLIS);
+
+    }
+
+
+    public void falseClick(View v) {
+        Log.i(TAG, "trueClick: FALSE Button Clicked");
+        showCorrectAnswer();
+
+        if (Objects.equals(Question.getQuestionByID(this, mAnswerID).getCorrectAnswer(), "True")) {
+            //the user is incorrect
+          Toast.makeText(this, R.string.wrong, Toast.LENGTH_SHORT).show();
+            QuizUtils.setCurrentScore(this, mCurrentScore);
+            Log.i(TAG, "onClick: current score is " + QuizUtils.getCurrentScore(this));
+        } else {
+             //the buser is correct
             mCurrentScore++;
             QuizUtils.setCurrentScore(this, mCurrentScore);
             Log.i(TAG, "onClick: current score is " + QuizUtils.getCurrentScore(this));
-
-        } else {
-            //user answered correctly, so let them know and increase the score by 1
-            Toast.makeText(this, getString(R.string.wrong),
-                    Toast.LENGTH_SHORT).show();
         }
-
         if (mCurrentScore > mHighScore) {
             mHighScore = mCurrentScore;
             QuizUtils.setHighScore(this, mHighScore);
@@ -150,17 +177,11 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (currentQuestion.getCorrectAnswer()) {
             case "True":
-                //if true button was pressed, user is correct. Set colors and increment score.
-
-
                 buttonTrue.setBackgroundResource(android.R.color.holo_green_light);
-
-                Log.i(TAG, "onClick: current score is " + QuizUtils.getCurrentScore(this));
                 buttonFalse.setBackgroundResource(android.R.color.holo_red_light);
 
                 break;
             case "False":
-
                 buttonFalse.setBackgroundResource(android.R.color.holo_green_light);
                 buttonTrue.setBackgroundResource(android.R.color.holo_red_light);
 
@@ -168,11 +189,6 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
             default:
                 throw new RuntimeException("Unknown button ID");
         }
-    }
-
-    private boolean checkQuestion (int mAnswerID){
-        String userAnswer = Question.getQuestionByID(this, mAnswerID).getCorrectAnswer();
-        return userAnswer.equals("true");
     }
 }
 

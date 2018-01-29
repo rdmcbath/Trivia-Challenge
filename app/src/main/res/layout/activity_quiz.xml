@@ -38,6 +38,7 @@
             <Button
                 android:id="@+id/buttonTrue"
                 android:clickable="true"
+                android:onClick="trueClick"
                 android:elevation="10dp"
                 android:layout_width="150dp"
                 android:layout_height="200dp"
@@ -50,6 +51,7 @@
             <Button
                 android:id="@+id/buttonFalse"
                 android:clickable="true"
+                android:onClick="falseClick"
                 android:elevation="10dp"
                 android:layout_width="150dp"
                 android:layout_height="200dp"
